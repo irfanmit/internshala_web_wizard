@@ -1,18 +1,68 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import '../App.css';
+import { materialIcons } from '@mui/material';
+import { FaHeart, FaHeartOutline } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const PetProfilePage = ({ match }) => {
-  // const [pet, setPet] = useState(null);
+const PetProfilePage = () => {
+  const [isFavorite, setIsFavorite] = useState(false);
+  const { id } = useParams();
+  // console.log("id " + id);
+  const [petData, setPetData] = useState('');
+  const [filteredPetData, setFilteredPetData] = useState([])
+  const petList = [
+    {
+      id : 1,
+      name: 'Pet Name 1',
+      price: 100,
+      description : 'A lovely breed '
+    },
+    {
+      id : 2,
+      name: 'Pet Name 2',
+      price: 150,
+      description : 'A lovely breed '
+    },
+    {
+      id : 3,
+      name: 'Pet Name 3',
+      price: 120,
+      description : 'A lovely breed '
+    },
+    // Add more pet items here
+  ];
+
+  const Int = (value) => parseInt(value, 10);
 
   useEffect(() => {
-    // // Fetch pet data from the backend using the pet's ID from the URL
-    // const petId = match.params.id;
+    const storedPetData = (localStorage.getItem('petList'))
+    setPetData(storedPetData);
+    console.log(petData)
+    console.log("id " + id);
+    const filtered = petList.filter(item => item.id === Int(id));
+    console.log(filtered);
+    setFilteredPetData(filtered)
 
-    // fetch(`http://localhost:5000/api/pets/${petId}`)
-    //   .then((response) => response.json())
-    //   .then((data) => setPet(data))
-    //   .catch((error) => console.error('Error fetching pet data:', error));
-  }, []);
+    
+    if (localStorage.getItem(`pet-fav`) === 'true') {
+      setIsFavorite(true);
+    }
+  }, [petData, id])
+
+
+//   useEffect(() => {
+//     console.log(petData);
+// if(petData){
+//   const filteringPetData = petData.filter(item => item.id === id);
+//   setFilteredPetData(filteringPetData)
+//   console.log(filteredPetData);
+// }
+//   },[petData])
+  
+  // const filteringPetData = petData.filter(item => item.id === id);
+  // setFilteredPetData(filteringPetData)
+  // console.log(filteredPetData);
 
   const handleEnquire = () => {
     // Implement the functionality to enquire about the pet
@@ -20,22 +70,30 @@ const PetProfilePage = ({ match }) => {
     alert('Enquire about this pet: ');
   };
 
-  // if (!pet) {
-  //   // Loading state while waiting for data from the backend
-  //   return <div>Loading...</div>;
-  // }
+  const toggleFavorite = () => {
+    setIsFavorite(!isFavorite);
+
+    if (isFavorite) {
+      localStorage.removeItem('pet-fav');
+    } else {
+      localStorage.setItem('pet-fav', 'true');
+    }
+  };
+
+  const favoriteIcon = isFavorite ? <FaHeart /> : '';
 
   return (
     <div className="pet-profile">
-      <h1>name</h1>
-      <img src="" alt="name" />
-      <p>Breed: </p>
-      <p>Age: 10</p>
-      <p>Description: good </p>
-      <p>Price: $123</p>
-      <Link to = "/chat"> 
-      <button onClick={handleEnquire}>Enquire</button>
-      </Link>
+    {filteredPetData.map((pet) => (
+      <div key={pet.id}>
+        <h1>{pet.name}</h1>
+        <h2>{pet.description}</h2>
+        <h2>{pet.age}</h2>
+        <h2>{pet.price}</h2>
+      </div>
+    ))}
+    
+   <Link to='/chat'> <button>Enquire</button></Link>
     </div>
   );
 };

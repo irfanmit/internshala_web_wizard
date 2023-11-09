@@ -10,21 +10,30 @@ const HomePage = () => {
 
   const petList = [
     {
+      id : 1,
       name: 'Pet Name 1',
       price: 100,
+      description : 'A lovely breed '
     },
     {
+      id : 2,
       name: 'Pet Name 2',
       price: 150,
+      description : 'A lovely breed '
     },
     {
+      id : 3,
       name: 'Pet Name 3',
       price: 120,
+      description : 'A lovely breed '
     },
     // Add more pet items here
   ];
-
   useEffect(() => {
+
+    
+
+  localStorage.setItem('petList', JSON.stringify(petList));
     // This effect runs whenever searchQuery, filterCriteria, or sortOrder changes.
     // It filters, sorts, and updates the sortedPets state accordingly.
 
@@ -87,7 +96,7 @@ const HomePage = () => {
           <div className="pet-item" key={index}>
             <h3>{pet.name}</h3>
             <p>Price: ${pet.price}</p>
-            <Link to={`/PetProfile/124eef42`}>
+            <Link to={`/PetProfile/${pet.id}`}>
               <button>View Details</button>
             </Link>
           </div>

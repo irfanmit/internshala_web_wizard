@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<HomePage/>} />
           <Route path="/login" element={<Login/>} />
           <Route path="/signup" element={<SignupPage/>} />
-          <Route path = "/PetProfile/124eef42" element={<PetProfilePage />} />
+          <Route path="/PetProfile/:id" element={<PetProfilePage />} />
           <Route path="/chat" element={<ChatComponent/>} />
        </Routes>
       </>

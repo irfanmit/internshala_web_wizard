@@ -122,3 +122,41 @@ button {
 button:hover {
   background-color: #555;
 }
+
+/* profile */
+.pet-profile {
+  margin: 0 auto;
+  width: 100%;
+  padding: 20px;
+  border: 1px solid #ccc;
+}
+
+.pet-profile img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+@media (max-width: 576px) {
+  .pet-profile {
+    width: 90%;
+  }
+}
+
+@media (max-width: 768px) {
+  .pet-profile {
+    width: 70%;
+  }
+}
+
+@media (max-width: 992px) {
+  .pet-profile {
+    width: 50%;
+  }
+}
+
+@media (max-width: 1200px) {
+  .pet-profile {
+    width: 30%;
+  }
+}

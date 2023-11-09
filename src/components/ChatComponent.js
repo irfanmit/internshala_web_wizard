@@ -44,7 +44,7 @@ const ChatComponent = () => {
         ))} */}
         {messages.map((msg, index) => (
             <div key={index} className="chat-message">
-            {msg.message} {msg.email}
+            {msg.message} {msg.email}   
             </div>
           ))}
       </div>
