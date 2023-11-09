@@ -1,24 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+// src/App.js
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch, Routes } from 'react-router-dom';
+import HomePage from './components/HomePage';
+import NavigationBar from './components/NaviationBar';
+import Login from './components/LoginPage';
+import SignupPage from './components/LoginPage';
+import PetProfilePage from './components/PetProfilePage';
+import ChatComponent from './components/ChatComponent';
 
 function App() {
+
+  const isAuthenticated = localStorage.getItem('authenticated') === 'true';
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    
+      <>
+        <NavigationBar />
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<SignupPage/>} />
+          <Route path = "/PetProfile/124eef42" element={<PetProfilePage />} />
+          <Route path="/chat" element={<ChatComponent/>} />
+       </Routes>
+      </>
   );
 }
 
